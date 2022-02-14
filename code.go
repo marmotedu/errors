@@ -7,7 +7,7 @@ import (
 )
 
 var (
-	unknownCoder defaultCoder = defaultCoder{1, http.StatusInternalServerError, "An internal server error occurred", "http://github.com/marmotedu/errors/README.md"}
+	unknownCoder defaultCoder = defaultCoder{0, http.StatusInternalServerError, "An internal server error occurred", "http://github.com/marmotedu/errors/README.md"}
 )
 
 // Coder defines an interface for an error code detail information.
@@ -71,7 +71,7 @@ var codes = map[int]Coder{}
 var codeMux = &sync.Mutex{}
 
 // Register register a user define error code.
-// It will overrid the exist code.
+// It will override the exist code.
 func Register(coder Coder) {
 	if coder.Code() == 0 {
 		panic("code `0` is reserved by `github.com/marmotedu/errors` as unknownCode error code")
