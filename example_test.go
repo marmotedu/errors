@@ -15,22 +15,6 @@ func ExampleNew_printf() {
 	err := New("whoops")
 	fmt.Printf("%+v", err)
 
-	// Example output:
-	// whoops
-	// github.com/marmotedu/errors_test.ExampleNew_printf
-	//         /home/dfc/src/github.com/marmotedu/errors/example_test.go:17
-	// testing.runExample
-	//         /home/dfc/go/src/testing/example.go:114
-	// testing.RunExamples
-	//         /home/dfc/go/src/testing/example.go:38
-	// testing.(*M).Run
-	//         /home/dfc/go/src/testing/testing.go:744
-	// main.main
-	//         /github.com/marmotedu/errors/_test/_testmain.go:106
-	// runtime.main
-	//         /home/dfc/go/src/runtime/proc.go:183
-	// runtime.goexit
-	//         /home/dfc/go/src/runtime/asm_amd64.s:2059
 }
 
 func ExampleWithMessage() {
