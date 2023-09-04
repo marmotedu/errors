@@ -91,8 +91,6 @@
 //
 // See the documentation for Frame.Format for more details.
 
-
-
 package errors
 
 import (
@@ -336,13 +334,23 @@ func (w *withCode) Cause() error { return w.cause }
 // Unwrap provides compatibility for Go 1.13 error chains.
 func (w *withCode) Unwrap() error { return w.cause }
 
+func (w *withCode) Message() string {
+	if w.err != nil {
+		return w.err.Error()
+	}
+	if w.cause != nil {
+		return w.Cause().Error()
+	}
+	return ""
+}
+
 // Cause returns the underlying cause of the error, if possible.
 // An error value has a cause if it implements the following
 // interface:
 //
-//     type causer interface {
-//            Cause() error
-//     }
+//	type causer interface {
+//	       Cause() error
+//	}
 //
 // If the error does not implement Cause, the original error will
 // be returned. If the error is nil, nil will be returned without further
@@ -365,4 +373,9 @@ func Cause(err error) error {
 		err = cause.Cause()
 	}
 	return err
+}
+
+func IsWithCode(err error) bool {
+	_, ok := err.(*withCode)
+	return ok
 }
